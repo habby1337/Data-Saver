@@ -5,11 +5,7 @@
 
 using namespace std;
 
-char rosso[] = { 0x1b, '[', '1', ';', '9', '1', 'm', 0 };
-char normale[] = { 0x1b, '[', '0', ';', '3', '9', 'm', 0 };
-char giallo[] = { 0x1b, '[', '2', ';', '9', '3', 'm', 0 };
-char magenta[] = { 0x1b, '[', '2', ';', '9', '5', 'm', 0 };
-char celeste[] = { 0x1b, '[', '2', ';', '9', '6', 'm', 0 };
+
 
 //Controlla se la cartella esiste, nel caso non esistesse la crea
 void CreaCartella(const char * path)
@@ -35,7 +31,7 @@ string EncryptDecrypt(string toEncrypt)
 
 void quit()
 {
-	std::cout << magenta <<"Bye.. Bye.." << normale << endl;
+	cout << magenta <<"Bye.. Bye.." << normale << endl;
 	Sleep(3000);
 	std::system("exit");
 	
@@ -63,21 +59,21 @@ void GetLogin()
 		ofstream bufferlogincred("data\\login.ds");
 
 		std::system("cls");
-		std::cout << giallo << "[REGISTRAZIONE]" << normale << endl;
-		std::cout << "\n" << endl;
-		std::cout << magenta << "ABenvenuto nuovo utente!" << normale << endl;
+		cout << giallo << "[REGISTRAZIONE]" << normale << endl;
+		cout << "\n" << endl;
+		cout << magenta << "ABenvenuto nuovo utente!" << normale << endl;
 
-		std::cout << "Vuoi creare un account? (S/n) ";
-		std::cin >> account_scelta;
+		cout << "Vuoi creare un account? (S/n) ";
+		cin >> account_scelta;
 
 		if(account_scelta == 's')
 		{
-			std::cout << "Inserire User ID -> ";
+			cout << "Inserire User ID -> ";
 			std::cin >> login.username;
 		setpw:
-			std::cout << "Inserire la password -> ";
+			cout << "Inserire la password -> ";
 			std::cin >> login.passwd;
-			std::cout << "Inserire di nuovo la password -> ";
+			cout << "Inserire di nuovo la password -> ";
 			std::cin >> login.repasswd;
 
 
@@ -88,7 +84,7 @@ void GetLogin()
 			else
 			{
 				std::system("cls");
-				std::cout << rosso << "[ERRORE] " << normale << "Le password non corrispondono!"<< endl;
+				cout << rosso << "[ERRORE] " << normale << "Le password non corrispondono!"<< endl;
 				Sleep(1000);
 				std::system("cls");
 				goto setpw;
@@ -106,7 +102,7 @@ void GetLogin()
 			}
 			else
 			{
-				std::cout << rosso <<"[ERRORE] "<< normale << "Unable to open file"<< endl;
+				cout << rosso <<"[ERRORE] "<< normale << "Unable to open file"<< endl;
 			}
 		}
 		else if(account_scelta == 'n')
@@ -131,14 +127,14 @@ void GetLogin()
 		fstream buffloginextr("data\\login.ds");
 		string outputfile;
 
-		std::cout << giallo << "[LOGIN]"<< normale << endl;
-		std::cout << "Enter User ID -> ";
+		cout << giallo << "[LOGIN]"<< normale << endl;
+		cout << "Enter User ID -> ";
 		std::cin >> login.username;
 		tryagain:
 
 		if(tentativi != 0){
 
-		std::cout << "Enter Your Password -> ";
+		cout << "Enter Your Password -> ";
 		std::cin >> login.passwd;
 
 		
@@ -156,7 +152,7 @@ void GetLogin()
 		
 			if(login.passwd != EncryptDecrypt(outputfile))
 			{
-				std::cout << rosso << "[ERRORE] " << normale << "Password sbagliata";
+				cout << rosso << "[ERRORE] " << normale << "Password sbagliata";
 				tentativi--;
 				Sleep(1000);
 				std::system("cls");
@@ -170,7 +166,7 @@ void GetLogin()
 		
 
 		}else{ 
-			std::cout << rosso << "[ERRORE] " << normale << "Tentativi Esauriti.... Uscita....";
+			cout << rosso << "[ERRORE] " << normale << "Tentativi Esauriti.... Uscita....";
 			Sleep(3000);
 			std::system("cls");
 			quit();
@@ -191,20 +187,20 @@ void CryptDecryptDirectory()
 	{
 		getline(buffloginextr, username);
 	}
-	std::cout << giallo << "[Menu]" << normale << endl;
+	cout << giallo << "[Menu]" << normale << endl;
 	
 	
 
 	int scelta;
 
-	std::cout << endl;
-	std::cout << "Ciao " << magenta << username << normale <<" :)" << endl;
-	std::cout << "" << endl;
-	std::cout << celeste << "1. " << normale << "Sblocca la cartella." << endl;
-	std::cout << celeste << "2. " << normale << "Blocca la cartella." << endl;
-	std::cout << celeste << "99. "<< normale << "Esci." << endl;
-	std::cout << endl;
-	std::cout << "Scelta: ";
+	cout << endl;
+	cout << "Ciao " << magenta << username << normale <<" :)" << endl;
+	cout << "" << endl;
+	cout << celeste << "1. " << normale << "Sblocca la cartella." << endl;
+	cout << celeste << "2. " << normale << "Blocca la cartella." << endl;
+	cout << celeste << "99. "<< normale << "Esci." << endl;
+	cout << endl;
+	cout << "Scelta: ";
 	std::cin >> scelta;
 
 	switch(scelta)
@@ -214,15 +210,15 @@ void CryptDecryptDirectory()
 		break;
 	case 1:
 		std::system("cacls \"File_Storage\" /e /p everyone:f");
-		std::cout << "unlocking..." << endl;;
+		cout << "unlocking..." << endl;;
 		break;
 	case 2:
 		std::system("cacls \"File_Storage\" /e /p everyone:n");
-		std::cout << "locking..." << endl;
+		cout << "locking..." << endl;
 		break;
 	default:
 		std::system("cacls \"File_Storage\" /e /p everyone:n");
-		std::cout << "locking..." << endl;
+		cout << "locking..." << endl;
 		break;
 	}
 
