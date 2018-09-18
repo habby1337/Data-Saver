@@ -1,15 +1,12 @@
 
 
 
-![alt text][register_page]
-![alt text][]
 
 
 
+![Data Saver Logo](/assets/logo.ico)
 
-
-
-# **Data Saver** - _**DS**_
+# **Data Saver** - _**DS**_ 
 
 
 #### it's a simple project with login system to keep your files safe.
@@ -17,6 +14,7 @@ ___
 ### Features:
 + Password protected (in order to use the service you must have an account)
 + Offline working (no online dependencies)
+
 
 ---
 <a name="mysql"></a>
