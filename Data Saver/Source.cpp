@@ -275,6 +275,11 @@ scelta:
 	
 }
 
+void checkupdate()
+{
+
+}
+
 int main()
 {
 	
