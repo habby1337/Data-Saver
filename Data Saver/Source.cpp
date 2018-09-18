@@ -7,7 +7,7 @@
 using namespace std;
 
 //Controlla se la cartella esiste, nel caso non esistesse la crea
-void CreateFolder(const char * path)
+void CreaCartella(const char * path)
 {
 	if(!CreateDirectory(path, NULL))
 	{
@@ -15,16 +15,8 @@ void CreateFolder(const char * path)
 	}
 }
 
-inline bool exist(const std::string& name)
-{
-	ifstream file(name);
-	if(!file)            // se il file non è stato trovato il file è 0  es. !file=1 o true
-		return false;    // Se il file non è stato trovato
-	else                 // Se il file è stato trovato il file è non-0
-		return true;     // Il file è stato trovato
-}
 
-string encryptDecrypt(string toEncrypt)
+string EncryptDecrypt(string toEncrypt)
 {
 	char key[3] = { 'K', 'C', 'Q' }; //Chiave di criptatura
 	string output = toEncrypt;
@@ -39,7 +31,7 @@ string encryptDecrypt(string toEncrypt)
 
 
 
-int DoLogin()
+int GetLogin()
 {
 	class credential
 	{
@@ -103,7 +95,8 @@ int DoLogin()
 		if(bufferlogincred.is_open())
 		{
 			bufferlogincred << login.username;
-			bufferlogincred << encryptDecrypt(login.passwd);
+			bufferlogincred << "\n";
+			bufferlogincred << EncryptDecrypt(login.passwd);
 			bufferlogincred.close();
 		}
 		else cout << "Unable to open file";
@@ -118,7 +111,7 @@ int DoLogin()
 		//va al login
 
 		int tentativi = 3;
-		const int LINE = 2;
+		const int LINE = 3;
 		fstream buffloginextr("data\\login.ds");
 		string outputfile;
 
@@ -143,11 +136,11 @@ int DoLogin()
 
 		
 		//TOGLIERE
-		cout << encryptDecrypt(outputfile) << endl;
+		cout << EncryptDecrypt(outputfile) << endl;
 		cout << login.passwd << endl;
 
 		
-			if(login.passwd != encryptDecrypt(outputfile))
+			if(login.passwd != EncryptDecrypt(outputfile))
 			{
 				cout << "password sbagliata";
 				tentativi--;
@@ -163,20 +156,51 @@ int DoLogin()
 		}else{ 
 			cout << "Tentativi Esauriti.... Uscita....";
 			system("pause");	//TOGLIERE
-		return EXIT_FAILURE;
+			return EXIT_FAILURE;
 		}
+
 	}
+}
+
+
+
+void CryptDecryptDirectory()
+{
+
+	const int LINE = 1;
+	fstream buffloginextr("data\\login.ds");
+	string username;
+	for(int i = 1; i <= LINE; i++)
+	{
+		getline(buffloginextr, username);
+	}
+
+	cout << "Ciao " << username << ":)" << endl;
+
+	int scelta;
+
+
+	cout << "Menu: " << endl;
+	cout << "1. Sblocca la cartella." << endl;
+	cout << "2. Blocca la cartella." << endl;
+
+
+
+
+
+
 }
 
 int main()
 {
 
-	CreateFolder("File_Storage");
-	CreateFolder("data");
-	system("cacls \"File_Storage\" /e /p everyone:f");//da cambiare in N
+	CreaCartella("File_Storage");
+	CreaCartella("data");
+	system("cacls \"File_Storage\" /e /p everyone:n");//da cambiare in N o F
 	system("cls");
 	
-	DoLogin();
+	GetLogin();
+	CryptDecryptDirectory();
 
 	
 
