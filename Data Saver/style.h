@@ -5,6 +5,7 @@ char normale[] = { 0x1b, '[', '0', ';', '3', '9', 'm', 0 };
 char giallo[] = { 0x1b, '[', '2', ';', '9', '3', 'm', 0 };
 char magenta[] = { 0x1b, '[', '2', ';', '9', '5', 'm', 0 };
 char celeste[] = { 0x1b, '[', '2', ';', '9', '6', 'm', 0 };
+char verde[] = { 0x1b, '[', '2', ';', '9', '2', 'm', 0 };
 
 void SetWindow(int Width, int Height)
 {
@@ -48,16 +49,19 @@ void printIntro()
 	SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &windowSize);*/
 	//#################################################################################
 
-	system("cls");
-	std::cout << std::endl;
-		std::cout << giallo <<"     ____  _____ "<< normale << std::endl;
-		std::cout << giallo <<"    / __ \\/ ___/ "<< normale << std::endl;
-		std::cout << celeste <<"   / / / /\__  \\   "<< normale << std::endl;
-		std::cout << magenta <<"  / /_/ /___/ /   "<< normale << std::endl;
-		std::cout << magenta <<" /_____//____/    "<< normale << std::endl;
-		std::cout << "                  Data Saver..." << std::endl;
-		std::cout << "                  made with " << rosso << "<3" << normale << " by Habby" << std::endl;
-	std::cout << std::endl;
+	std::system("cls");
+	 std::cout <<  std::endl;
+		 std::cout << giallo <<"     ____  _____ "<< normale <<  std::endl;
+		 std::cout << giallo <<"    / __ \\/ ___/ "<< normale <<  std::endl;
+		 std::cout << celeste <<"   / / / /\__  \\   "<< normale <<  std::endl;
+		 std::cout << magenta <<"  / /_/ /___/ /   "<< normale <<  std::endl;
+		 std::cout << magenta <<" /_____//____/    "<< normale <<  std::endl;
+		 std::cout << "                  Data Saver..." <<  std::endl;
+		 std::cout << "                  made with " << rosso << "<3" << normale << " by Habby" <<  std::endl;
+	 std::cout <<  std::endl;
+	 std::cout <<  std::endl;
+	 std::cout <<  std::endl;
+	 std::cout <<  std::endl;
 
 	
 	return;

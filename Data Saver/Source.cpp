@@ -33,7 +33,7 @@ void quit()
 {
 	cout << magenta <<"Bye.. Bye.." << normale << endl;
 	Sleep(3000);
-	std::system("exit");
+	 system("exit");
 	
 }
 
@@ -58,7 +58,7 @@ void GetLogin()
 		char account_scelta;
 		ofstream bufferlogincred("data\\login.ds");
 
-		std::system("cls");
+		 system("cls");
 		cout << giallo << "[REGISTRAZIONE]" << normale << endl;
 		cout << "\n" << endl;
 		cout << magenta << "ABenvenuto nuovo utente!" << normale << endl;
@@ -69,12 +69,12 @@ void GetLogin()
 		if(account_scelta == 's')
 		{
 			cout << "Inserire User ID -> ";
-			std::cin >> login.username;
+			 cin >> login.username;
 		setpw:
 			cout << "Inserire la password -> ";
-			std::cin >> login.passwd;
+			 cin >> login.passwd;
 			cout << "Inserire di nuovo la password -> ";
-			std::cin >> login.repasswd;
+			 cin >> login.repasswd;
 
 
 			if(login.passwd == login.repasswd)
@@ -83,10 +83,10 @@ void GetLogin()
 			}
 			else
 			{
-				std::system("cls");
+				 system("cls");
 				cout << rosso << "[ERRORE] " << normale << "Le password non corrispondono!"<< endl;
 				Sleep(1000);
-				std::system("cls");
+				 system("cls");
 				goto setpw;
 
 
@@ -121,7 +121,7 @@ void GetLogin()
 	else
 	{
 
-		std::system("cls");
+		 system("cls");
 		int tentativi = 3;
 		const int LINE = 3;
 		fstream buffloginextr("data\\login.ds");
@@ -129,13 +129,13 @@ void GetLogin()
 
 		cout << giallo << "[LOGIN]"<< normale << endl;
 		cout << "Enter User ID -> ";
-		std::cin >> login.username;
+		 cin >> login.username;
 		tryagain:
 
 		if(tentativi != 0){
 
 		cout << "Enter Your Password -> ";
-		std::cin >> login.passwd;
+		 cin >> login.passwd;
 
 		
 		
@@ -155,7 +155,7 @@ void GetLogin()
 				cout << rosso << "[ERRORE] " << normale << "Password sbagliata";
 				tentativi--;
 				Sleep(1000);
-				std::system("cls");
+				 system("cls");
 				goto tryagain;
 			}
 			else
@@ -168,7 +168,7 @@ void GetLogin()
 		}else{ 
 			cout << rosso << "[ERRORE] " << normale << "Tentativi Esauriti.... Uscita....";
 			Sleep(3000);
-			std::system("cls");
+			 system("cls");
 			quit();
 		}
 
@@ -179,7 +179,8 @@ void GetLogin()
 
 void CryptDecryptDirectory()
 {
-	std::system("cls");
+	 system("cls");
+	 
 	const int LINE = 1;
 	fstream buffloginextr("data\\login.ds");
 	string username;
@@ -189,36 +190,85 @@ void CryptDecryptDirectory()
 	}
 	cout << giallo << "[Menu]" << normale << endl;
 	
+	bool statuscartella = false; //messa qui sennò viene resettata
+scelta:
+	system("cls");
+	int scelta = 0;
 	
-
-	int scelta;
+	
 
 	cout << endl;
 	cout << "Ciao " << magenta << username << normale <<" :)" << endl;
+	if(statuscartella == true)
+	{
+
+
+		cout << "La cartella e' " << verde << "Sbloccatta"<< normale << "." << endl;
+	}
+	else
+	{
+
+		cout << "La cartella e' " << rosso << "Bloccata" << normale << "." << endl;
+	}
+	
 	cout << "" << endl;
 	cout << celeste << "1. " << normale << "Sblocca la cartella." << endl;
 	cout << celeste << "2. " << normale << "Blocca la cartella." << endl;
 	cout << celeste << "99. "<< normale << "Esci." << endl;
 	cout << endl;
 	cout << "Scelta: ";
-	std::cin >> scelta;
+	cin >> scelta;
 
 	switch(scelta)
 	{
 	case 99:
+		system("cacls \"File_Storage\" /e /p everyone:n");
+		system("cls");
+		if(statuscartella == true){
+			cout << endl;
+			cout << endl;
+			cout << giallo <<"[ATTENZIONE]"<< normale << " Ehy hai lasciato la cartella sbloccata, la blocchero' io per te :)" << endl;
+			Sleep(2000);
+			cout << verde << "[INFO] " << normale << "Bloccata! " << endl;
+			Sleep(1000);
+			cout << endl;
+			cout << endl;
+		}
+		else
+		{
+
+		}
 		quit();
 		break;
 	case 1:
-		std::system("cacls \"File_Storage\" /e /p everyone:f");
-		cout << "unlocking..." << endl;;
+		system("cacls \"File_Storage\" /e /p everyone:f");
+		system("cls");
+		cout << verde << "[INFO] " << normale << "Sbloccando..." << endl;
+		Sleep(500);
+		cout << verde << "[INFO] " << normale << "Sbloccata! " << endl;
+		statuscartella = true;
+		Sleep(2000);
+		goto scelta;
 		break;
 	case 2:
-		std::system("cacls \"File_Storage\" /e /p everyone:n");
-		cout << "locking..." << endl;
+		system("cacls \"File_Storage\" /e /p everyone:n");
+		system("cls");
+		cout << verde << "[INFO] "<< normale << "Bloccando..."<< endl;
+		Sleep(500);
+		cout << verde << "[INFO] " << normale << "Bloccata! " << endl;
+		statuscartella = false;
+		Sleep(2000);
+		goto scelta;
 		break;
 	default:
-		std::system("cacls \"File_Storage\" /e /p everyone:n");
-		cout << "locking..." << endl;
+		system("cacls \"File_Storage\" /e /p everyone:n");
+		system("cls");
+		cout << verde << "[INFO] " << normale << "Bloccando..." << endl;
+		Sleep(500);
+		cout << verde << "[INFO] " << normale << "Bloccata! "<< endl;
+		statuscartella = false;
+		Sleep(2000);
+		goto scelta;
 		break;
 	}
 
@@ -230,10 +280,10 @@ int main()
 	
 	CreaCartella("File_Storage");
 	CreaCartella("data");
-	std::system("cacls \"File_Storage\" /e /p everyone:n");//da cambiare in N o F
-	std::system("cls");
+	 system("cacls \"File_Storage\" /e /p everyone:n");//da cambiare in N o F
+	 system("cls");
 	printIntro();
-	std::system("pause"); //TOGLIERE
+	 system("pause"); //TOGLIERE
 	GetLogin();
 	CryptDecryptDirectory();
 
@@ -242,6 +292,6 @@ int main()
 	
 
 
-	std::system("pause");
+	 system("pause");
 	return 0;
 }
