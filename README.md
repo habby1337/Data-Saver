@@ -4,7 +4,7 @@
 
 
 
-![Data Saver Logo](/assets/logo.ico)
+![Data Saver Logo](/assets/logo.png)
 
 # **Data Saver** - _**DS**_ 
 
