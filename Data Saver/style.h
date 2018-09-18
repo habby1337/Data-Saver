@@ -31,7 +31,7 @@ void printIntro()
 
 	//							CONSOLE STYLE
 //#################################################################################
-	SetConsoleTitle("TITOLO");
+	SetConsoleTitle("Data Saver [Made with <3 by Fede.Tensi aka Habby]");
 
 	int Alpha = 80;
 	CONSOLE_FONT_INFOEX cf = {
@@ -57,7 +57,7 @@ void printIntro()
 		 std::cout << magenta <<"  / /_/ /___/ /   "<< normale <<  std::endl;
 		 std::cout << magenta <<" /_____//____/    "<< normale <<  std::endl;
 		 std::cout << "                  Data Saver..." <<  std::endl;
-		 std::cout << "                  made with " << rosso << "<3" << normale << " by Habby" <<  std::endl;
+		 std::cout << "                    made with " << rosso << "<3" << normale << " by " << magenta << "Habby" << normale << std::endl;
 	 std::cout <<  std::endl;
 	 std::cout <<  std::endl;
 	 std::cout <<  std::endl;

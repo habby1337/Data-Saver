@@ -127,7 +127,8 @@
     <ResourceCompile Include="Data Saver.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon1.ico" />
+    <Image Include="..\..\..\..\Downloads\icona.ico" />
+    <Image Include="..\..\..\..\Downloads\Lock-icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
