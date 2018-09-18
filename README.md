@@ -4,9 +4,9 @@
 
 
 
-![Data Saver Logo](/assets/logo.png)
 
-# **Data Saver** - _**DS**_ 
+
+# **Data Saver** - _**DS**_ ![Data Saver Logo](/assets/logo.png)
 
 
 #### it's a simple project with login system to keep your files safe.
