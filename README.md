@@ -40,6 +40,7 @@ A step by step series of examples that tell you how to get a development env run
 ## Built With
 
 * [Visual Studio](https://visualstudio.microsoft.com/it/ "VS Page") - The compiler used.
+* [C++](http://www.cplusplus.com/ "C++ Forum Page") - The lenguage used.
 
 
 
