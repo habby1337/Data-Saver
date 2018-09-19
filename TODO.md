@@ -33,6 +33,8 @@ ___
 + ➕ **ADD?** Multi account
 + ➕ **ADD!** sistema di criptografia differente e non scritto nel programma 
 + ➕ **ADD!** Un sistema di update con le api di github o tramite il sito e curl
++ ➕ **ADD** Blocco cartelle
++ ➕ **ADD** Comment
   
 
 
