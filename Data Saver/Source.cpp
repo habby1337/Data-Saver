@@ -283,13 +283,14 @@ void checkupdate()
 int main()
 {
 	
-	CreaCartella("File_Storage");
-	CreaCartella("data");
-	 system("cacls \"File_Storage\" /e /p everyone:n");//da cambiare in N o F
-	 system("cls");
+	
 	printIntro();
 	 system("pause"); //TOGLIERE
 	GetLogin();
+	CreaCartella("File_Storage");
+	CreaCartella("data");
+	system("cacls \"File_Storage\" /e /p everyone:n");//da cambiare in N o F
+	system("cls");
 	CryptDecryptDirectory();
 
 	
