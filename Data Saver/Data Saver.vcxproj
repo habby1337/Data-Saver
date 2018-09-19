@@ -124,7 +124,6 @@
   <ItemGroup>
     <ClInclude Include="include.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
     <ClInclude Include="style.h" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +132,9 @@
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\icona.ico" />
     <Image Include="..\..\..\..\Downloads\Lock-icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libcurl.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
