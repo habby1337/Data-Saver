@@ -65,6 +65,11 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 * **Federico Tensi** - *Initial work* - [Habby](https://github.com/habby1337)
 
+## Tester
+
+* **NOME** - *COSA HA FATTO* - [NICK](LINKPROFILO)
+
+
 See also the list of [contributors](https://github.com/habby1337/Page-to-upload-file/graphs/contributors) who participated in this project.
 
 ## License
