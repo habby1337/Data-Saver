@@ -10,3 +10,5 @@
 #include <fstream>
 #include <curl/curl.h>
 #include <stdlib.h>
+
+#include <conio.h> //per mascherare l'input

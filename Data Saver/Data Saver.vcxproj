@@ -130,10 +130,6 @@
     <ResourceCompile Include="Data Saver.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\icona.ico" />
-    <Image Include="..\..\..\..\Downloads\Lock-icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="libcurl.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

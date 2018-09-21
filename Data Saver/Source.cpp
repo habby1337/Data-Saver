@@ -6,6 +6,16 @@
 using namespace std;
 
 
+//classe che contiene le variablili credenziali 
+class credential
+{
+public:
+	string username, passwd, repasswd;
+	string  folder_name;
+};
+
+credential login;
+
 //Velocizza l'utilizzo della funzione system
 void pulire()
 {
@@ -43,23 +53,27 @@ void cacls(string folder, string state)
 //Uscita dal programma
 void quit()
 {
-	cout << magenta <<"Bye.. Bye.." << normale << endl;
+	std::cout << magenta <<"Bye.. Bye.." << normale << endl;
 	Sleep(3000);
 	exit(EXIT_SUCCESS);
 }
 
+string space2underscore(string text)
+{
+	for(int i = 0; i < text.length(); i++)
+	{
+		if(isspace(text[i]))
+			text[i] = '_';
+	}
+	return text;
+}
 
 //Capisce se esiste già un account se si fa fare il login
 void GetLogin() 
 {
-	//classe che contiene le variablili credenziali 
-	class credential	
-	{
-	public:
-		string username, passwd, repasswd;
-	};
+	
 
-	credential login;
+	
 
 	//prepara il file login.ds
 	fstream file("data\\login.ds");	
@@ -73,23 +87,36 @@ void GetLogin()
 		char account_scelta;
 		
 		pulire();
-		cout << giallo << "[REGISTRAZIONE]" << normale << endl;
-		cout << "\n" << endl;
-		cout << magenta << "ABenvenuto nuovo utente!" << normale << endl;
-		cout << "Vuoi creare un account? (S/n) ";
+		std::cout << giallo << "[REGISTRAZIONE]" << normale << endl;
+		std::cout << "\n" << endl;
+		std::cout << magenta << "ABenvenuto nuovo utente!" << normale << endl;
+		std::cout << "Vuoi creare un account? (S/n) ";
 		cin >> account_scelta;
+
 
 		//scelta se creare o no l'account
 		if(account_scelta == 's')	
 		{
 			ofstream bufferlogincred("data\\login.ds");
 			
-			cout << "Inserire User ID -> ";
+			
+			std::cout << "Inserire nome della cartella -> ";
+			cin.ignore();
+			std::getline(std::cin, login.folder_name);
+			
+		
+
+			system("pause");	//TOGLIERE
+
+			
+
+
+			std::cout << "Inserire User ID -> ";
 			 cin >> login.username;
 		setpw:
-			cout << "Inserire la password -> ";
+			std::cout << "Inserire la password -> ";
 			 cin >> login.passwd;
-			cout << "Inserire di nuovo la password -> ";
+			std::cout << "Inserire di nuovo la password -> ";
 			 cin >> login.repasswd;
 
 			//convalida le password
@@ -98,7 +125,7 @@ void GetLogin()
 			else
 			{	//non uguali
 				pulire();
-				cout << rosso << "[ERRORE] " << normale << "Le password non corrispondono!"<< endl;
+				std::cout << rosso << "[ERRORE] " << normale << "Le password non corrispondono!"<< endl;
 				Sleep(1000);
 				pulire();
 				goto setpw;//lo riporta alla scelta delle passwd
@@ -107,6 +134,8 @@ void GetLogin()
 			//convalida se il file è pronto per ricevere dei dati
 			if(bufferlogincred.is_open())
 			{
+				bufferlogincred << space2underscore(login.folder_name);
+				bufferlogincred << "\n";
 				bufferlogincred << login.username;
 				bufferlogincred << "\n";
 				bufferlogincred << EncryptDecrypt(login.passwd);
@@ -115,7 +144,7 @@ void GetLogin()
 			}
 			else
 			{	//Il file non può ricevere input
-				cout << rosso <<"[ERRORE] "<< normale << "Unable to open file"<< endl;
+				std::cout << rosso <<"[ERRORE] "<< normale << "Unable to open file"<< endl;
 			}
 			
 		}
@@ -127,7 +156,7 @@ void GetLogin()
 
 		}else //se l'input inserito non è valido
 		{ 
-			cout << rosso << "[ERRORE] " << normale << "Input non valido!" << endl;
+			std::cout << rosso << "[ERRORE] " << normale << "Input non valido!" << endl;
 			Sleep(2000);
 			system("rd /S /Q data");
 			quit();
@@ -138,20 +167,64 @@ void GetLogin()
 	{
 		pulire();
 		int tentativi = 3; //Tentativi prima della chiusura di sicurezza del programma
-		const int LINE = 3; //la linea del file da leggere
-		fstream buffloginextr("data\\login.ds"); //prepara di nuovo il file login.ds
-		string outputfile;
+		
 
-		cout << giallo << "[LOGIN]"<< normale << endl;
-		cout << "Enter User ID -> ";
+	tryagain:
+		std::cout << giallo << "[LOGIN]"<< normale << endl;
+		std::cout << "Enter User ID -> ";
 		 cin >> login.username;
-		tryagain:
+		
+		 const int LINE = 2; //la linea del file da leggere
+		 fstream buffusername("data\\login.ds"); //prepara di nuovo il file login.ds
+		 string outputUsername;
+
+		 for(int i = 1; i <= LINE; i++)
+		 {
+			 getline(buffusername, outputUsername);
+		 }
+
+		 //Convalida se la password è uguale a quella salvata
+		 if(login.username != outputUsername)
+		 {
+			 std::cout << rosso << "[ERRORE] " << normale << "UserName sbagliato";
+			 tentativi--;
+			 Sleep(1000);
+			 pulire();
+			 goto tryagain;
+		 }
+		 else {/*l'username è coretto*/ }
 
 		//Check dei tentativi rimasti
 		if(tentativi != 0){
 
-		cout << "Enter Your Password -> ";
-		 cin >> login.passwd;
+		std::cout << "Enter Your Password -> ";
+		 char c = ' ';
+
+		 while(c != 13) //Fa un loop finche non viene premuto il tasto "ENTER"
+		 {
+			 c = _getch();
+			 if(c == 13)
+				 break;
+
+			 if(c == 8)
+			 {
+				 if(login.passwd.size() != 0)   //Cancella solo se c'è un input 
+				 {
+					 cout << "\b \b";
+					 login.passwd.erase(login.passwd.size() - 1);
+				 }
+			 }
+
+			 if((c > 47 && c < 58) || (c > 64 && c < 91) || (c > 96 && c < 123))  //ASCii per integer e alfanumerici 
+			 {
+				 login.passwd += c;
+				 cout << "*";
+			 }
+		 }
+		
+		 const int LINE = 3; //la linea del file da leggere
+		 fstream buffloginextr("data\\login.ds"); //prepara di nuovo il file login.ds
+		 string outputfile;
 
 		for(int i = 1; i <= LINE; i++){ 
 			getline(buffloginextr, outputfile);
@@ -160,7 +233,7 @@ void GetLogin()
 			//Convalida se la password è uguale a quella salvata
 			if(login.passwd != EncryptDecrypt(outputfile))
 			{
-				cout << rosso << "[ERRORE] " << normale << "Password sbagliata";
+				std::cout << rosso << "[ERRORE] " << normale << "Password sbagliata";
 				tentativi--;
 				Sleep(1000);
 				 pulire();
@@ -169,7 +242,7 @@ void GetLogin()
 			else {/*La pw è coretta*/ }
 		}
 		else{ //Nel caso che i tentativi siano finiti
-			cout << rosso << "[ERRORE] " << normale << "Tentativi Esauriti.... Uscita....";
+			std::cout << rosso << "[ERRORE] " << normale << "Tentativi Esauriti.... Uscita....";
 			Sleep(3000);
 			pulire();
 			quit();
@@ -184,18 +257,35 @@ void CryptDecryptDirectory()
 	pulire();
 	cacls("data", "f");
 
-	 
-	const int LINE = 1;
-	fstream buffloginextr("data\\login.ds"); //Preparazione file
+	
+	// -_- non credo di doverla spiegare
+
+	const int LINE_FolderName = 1;
+	fstream buffFolderName("data\\login.ds"); //Preparazione file
+	//Prende il nome della cartella
+	for(int i = 1; i <= LINE_FolderName; i++)
+	{
+		getline(buffFolderName, login.folder_name);
+	}
+	/*const char *foldername = space2underscore(login.folder_name).c_str(); //Passa da string a cons char
+	CreaCartella(foldername);*/
+	const char *folder = login.folder_name.c_str();
+	cout << folder << endl;
+	CreaCartella(folder);
+
+	system("pause"); //TOGLIERE
+
+	const int LINE_Username = 2;
+	fstream buffUsername("data\\login.ds"); //Preparazione file
 	string username;
 
-	for(int i = 1; i <= LINE; i++)
+	for(int i = 1; i <= LINE_Username; i++)
 	{
-		getline(buffloginextr, username);
+		getline(buffUsername, username);
 	}
 	cacls("data", "n");
 	
-	cout << giallo << "[Menu]" << normale << endl;
+	std::cout << giallo << "[Menu]" << normale << endl;
 	
 	bool statuscartella = false; //messa qui sennò viene resettata
 
@@ -204,44 +294,44 @@ scelta:
 	pulire();
 	int scelta = 0;
 	
-	cout << endl;
-	cout << "Ciao " << magenta << username << normale <<" :)" << endl;
+	std::cout << endl;
+	std::cout << "Ciao " << magenta << username << normale <<" :)" << endl;
 
 	//Convalida se la cartella è bloccata o sbloccata
 	if(statuscartella == true)
 	{
-		cout << "La cartella e' " << verde << "Sbloccatta"<< normale << "." << endl;
+		std::cout << "La cartella e' " << verde << "Sbloccatta"<< normale << "." << endl;
 	}
 	else
 	{
-		cout << "La cartella e' " << rosso << "Bloccata" << normale << "." << endl;
+		std::cout << "La cartella e' " << rosso << "Bloccata" << normale << "." << endl;
 	}
 	
-	cout << "" << endl;
-	cout << celeste << "1. " << normale << "Sblocca la cartella." << endl;
-	cout << celeste << "2. " << normale << "Blocca la cartella." << endl;
-	cout << celeste << "99. "<< normale << "Esci." << endl;
-	cout << endl;
-	cout << "Scelta: ";
+	std::cout << "" << endl;
+	std::cout << celeste << "1. " << normale << "Sblocca la cartella." << endl;
+	std::cout << celeste << "2. " << normale << "Blocca la cartella." << endl;
+	std::cout << celeste << "99. "<< normale << "Esci." << endl;
+	std::cout << endl;
+	std::cout << "Scelta: ";
 	cin >> scelta;
 
 	//Switch decisioni riguardo la cartella di salvataggio dati 
 	switch(scelta)
 	{
 	case 99: //Uscita del programma
-		cacls("File_Storage", "n");
+		cacls(login.folder_name, "n");
 		pulire();
 
 		//Convalida se la cartella è bloccata al momento dell'uscita
 		if(statuscartella == true){
-			cout << endl;
-			cout << endl;
-			cout << giallo <<"[ATTENZIONE]"<< normale << " Ehy hai lasciato la cartella sbloccata, la blocchero' io per te :)" << endl;
+			std::cout << endl;
+			std::cout << endl;
+			std::cout << giallo <<"[ATTENZIONE]"<< normale << " Ehy hai lasciato la cartella sbloccata, la blocchero' io per te :)" << endl;
 			Sleep(2000);
-			cout << verde << "[INFO] " << normale << "Bloccata! " << endl;
+			std::cout << verde << "[INFO] " << normale << "Bloccata! " << endl;
 			Sleep(1000);
-			cout << endl;
-			cout << endl;
+			std::cout << endl;
+			std::cout << endl;
 		}
 		else{ /*Tutto okei, la cartella è bloccata*/ }
 		quit();
@@ -249,11 +339,11 @@ scelta:
 
 
 	case 1: //La cartella viene Sbloccata
-		cacls("File_Storage", "f");
+		cacls(login.folder_name, "f");
 		pulire();
-		cout << verde << "[INFO] " << normale << "Sbloccando..." << endl;
+		std::cout << verde << "[INFO] " << normale << "Sbloccando..." << endl;
 		Sleep(500);
-		cout << verde << "[INFO] " << normale << "Sbloccata! " << endl;
+		std::cout << verde << "[INFO] " << normale << "Sbloccata! " << endl;
 		statuscartella = true;
 		Sleep(2000);
 		goto scelta;
@@ -261,11 +351,11 @@ scelta:
 
 
 	case 2: //La catella viene Bloccata
-		cacls("File_Storage", "n");
+		cacls(login.folder_name, "n");
 		pulire();
-		cout << verde << "[INFO] "<< normale << "Bloccando..."<< endl;
+		std::cout << verde << "[INFO] "<< normale << "Bloccando..."<< endl;
 		Sleep(500);
-		cout << verde << "[INFO] " << normale << "Bloccata! " << endl;
+		std::cout << verde << "[INFO] " << normale << "Bloccata! " << endl;
 		statuscartella = false;
 		Sleep(2000);
 		goto scelta;
@@ -273,11 +363,11 @@ scelta:
 
 
 	default: //Opzione di default, per raggioni di sicurezza la cartella viene bloccata se l'input è diverso da "1"
-		cacls("File_Storage", "n");
+		cacls(login.folder_name, "n");
 		pulire();
-		cout << verde << "[INFO] " << normale << "Bloccando..." << endl;
+		std::cout << verde << "[INFO] " << normale << "Bloccando..." << endl;
 		Sleep(500);
-		cout << verde << "[INFO] " << normale << "Bloccata! "<< endl;
+		std::cout << verde << "[INFO] " << normale << "Bloccata! "<< endl;
 		statuscartella = false;
 		Sleep(2000);
 		goto scelta;
@@ -303,11 +393,14 @@ int main()
 	//Funzione di login o register
 	GetLogin();
 
-	// -_- non credo di doverla spiegare
-	CreaCartella("File_Storage");
+	
+
+
+
+	
 
 	//Funzione semplificata di system(cacls )
-	cacls("File_Storage", "n");
+	cacls(login.folder_name, "n");
 
 	//Pulizia schermo
 	pulire();
