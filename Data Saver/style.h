@@ -25,12 +25,11 @@ void SetWindow(int Width, int Height)
 }
 
 
-
 void printIntro()
 {
 
 	//							CONSOLE STYLE
-//#################################################################################
+	//#################################################################################
 	SetConsoleTitle("Data Saver [Made with <3 by Fede.Tensi aka Habby]");
 
 	int Alpha = 80;
@@ -45,8 +44,6 @@ void printIntro()
 
 	SetWindow(105, 30);
 
-	/*SMALL_RECT windowSize = { 0, 0, 70, 50 };
-	SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &windowSize);*/
 	//#################################################################################
 
 	std::system("cls");
@@ -67,6 +64,3 @@ void printIntro()
 	return;
 }
 
-
-///-------------------^^ COSE CUSTOM ^^--------------------------
-///-------------------^^ COSE CUSTOM ^^--------------------------

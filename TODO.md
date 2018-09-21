@@ -37,6 +37,17 @@ ___
 + ➕ **DONE** Commenti
 + ➕ **ADD** Cambia password
 
+
+
+### BUGS
+
++ Password maggiori di tot
++ Creare una cartella del eseguibile
++ Le cartelle possono essere 
++ Se il programma viene chiuso con la cartella sbloccata, non viene ri bloccata
+
+
+
   
 
 

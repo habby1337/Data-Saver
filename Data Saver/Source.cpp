@@ -104,11 +104,7 @@ void GetLogin()
 			cin.ignore();
 			std::getline(std::cin, login.folder_name);
 			
-		
-
-			system("pause");	//TOGLIERE
-
-			
+				
 
 
 			std::cout << "Inserire User ID -> ";
@@ -223,7 +219,7 @@ void GetLogin()
 	tryagain:
 		std::cout << giallo << "[LOGIN]"<< normale << endl;
 		std::cout << "Enter User ID -> ";
-		 cin >> login.username;
+		cin >> login.username;
 		
 		 const int LINE = 2; //la linea del file da leggere
 		 fstream buffusername("data\\login.ds"); //prepara di nuovo il file login.ds
@@ -281,13 +277,14 @@ void GetLogin()
 			getline(buffloginextr, outputfile);
 		}
 
+
 			//Convalida se la password è uguale a quella salvata
-			if(login.passwd != EncryptDecrypt(outputfile))
+			if(EncryptDecrypt(login.passwd) != outputfile)
 			{
 				std::cout << rosso << "[ERRORE] " << normale << "Password sbagliata";
 				tentativi--;
 				Sleep(1000);
-				 pulire();
+				pulire();
 				goto tryagain;
 			}
 			else {/*La pw è coretta*/ }
@@ -309,7 +306,7 @@ void CryptDecryptDirectory()
 	cacls("data", "f");
 
 	
-	// -_- non credo di doverla spiegare
+	
 
 	const int LINE_FolderName = 1;
 	fstream buffFolderName("data\\login.ds"); //Preparazione file
@@ -318,13 +315,12 @@ void CryptDecryptDirectory()
 	{
 		getline(buffFolderName, login.folder_name);
 	}
-	/*const char *foldername = space2underscore(login.folder_name).c_str(); //Passa da string a cons char
-	CreaCartella(foldername);*/
+
+
 	const char *folder = login.folder_name.c_str();
 	cout << folder << endl;
 	CreaCartella(folder);
 
-	system("pause"); //TOGLIERE
 
 	const int LINE_Username = 2;
 	fstream buffUsername("data\\login.ds"); //Preparazione file
@@ -430,6 +426,24 @@ scelta:
 //Utilizzato per convalidare nuove versioni del programma
 void Checkupdate()
 {
+	CURL* buffer;
+	CURLcode risultato;
+
+	buffer = curl_easy_init();
+	curl_easy_setopt(buffer, CURLOPT_URL, "https://habby1337.github.io/datasaver/version.txt");
+	curl_easy_setopt(buffer, CURLOPT_HEADER, 1);
+	curl_easy_setopt(buffer, CURLOPT_WRITEDATA, NULL);
+	curl_easy_setopt(buffer, CURLOPT_WRITEFUNCTION, NULL);
+
+
+
+	risultato = curl_easy_perform(buffer);
+
+	curl_easy_cleanup(buffer);
+
+
+	//cout << risultato;
+
 
 }
 
@@ -437,18 +451,12 @@ void Checkupdate()
 //Funzione main
 int main()
 {
-	
+	/*
 	//Output della intro (la funzione si trova in style.h)
 	printIntro();
 
 	//Funzione di login o register
 	GetLogin();
-
-	
-
-
-
-	
 
 	//Funzione semplificata di system(cacls )
 	cacls(login.folder_name, "n");
@@ -458,14 +466,13 @@ int main()
 
 	//Funzione base del programma
 	CryptDecryptDirectory();
-
+	*/
 	//Check degli update
 	Checkupdate();
-	
 
+	system("pause"); //TOGLIERE
 	
-
-	 exit(EXIT_SUCCESS);//Uscita con successo
+	exit(EXIT_SUCCESS);//Uscita con successo
 
 	return 0;
 }
