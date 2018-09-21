@@ -29,13 +29,14 @@ ___
 
 ### LIST TODO
 
-+ ➕ **ADD** Dare la possibilità di scegliere il nome della cartella
++ ➕ **DONE** Dare la possibilità di scegliere il nome della cartella
 + ➕ **ADD?** Multi account
 + ➕ **ADD!** sistema di criptografia differente e non scritto nel programma 
 + ➕ **ADD!** Un sistema di update con le api di github o tramite il sito e curl
-+ ➕ **ADD** Blocco cartelle
-+ ➕ **ADD** Commenti
++ ➕ **ADD** Sistema di Blocco cartelle valido anche se non si hanno gli accessi da amministratore 
++ ➕ **DONE** Commenti
 + ➕ **ADD** Cambia password
+
   
 
 
