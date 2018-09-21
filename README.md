@@ -14,6 +14,7 @@ ___
 ### Features:
 + Password protected (in order to use the service you must have an account)
 + Offline working (no online dependencies)
++ Custom Folder Name
 
 
 ---
@@ -41,6 +42,8 @@ A step by step series of examples that tell you how to get a development env run
 
 * [Visual Studio](https://visualstudio.microsoft.com/it/ "VS Page") - The compiler used.
 * [C++](http://www.cplusplus.com/ "C++ Forum Page") - The lenguage used.
+* [CURL](https://curl.haxx.se/ "Curl Page") - Command line tool and library 
+for transferring data with URLs
 
 
 

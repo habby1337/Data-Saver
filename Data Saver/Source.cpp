@@ -116,8 +116,59 @@ void GetLogin()
 		setpw:
 			std::cout << "Inserire la password -> ";
 			 cin >> login.passwd;
+
+			 char c = ' ';
+			 while(c != 13) //Fa un loop finche non viene premuto il tasto "ENTER"
+			 {
+				 c = _getch();
+				 if(c == 13)
+					 break;
+
+				 if(c == 8)
+				 {
+					 if(login.passwd.size() != 0)   //Cancella solo se c'è un input 
+					 {
+						 cout << "\b \b";
+						 login.passwd.erase(login.passwd.size() - 1);
+					 }
+				 }
+
+				 if((c > 47 && c < 58) || (c > 64 && c < 91) || (c > 96 && c < 123))  //ASCii per integer e alfanumerici 
+				 {
+					 login.passwd += c;
+					 cout << "*";
+				 }
+			 }
+
+
 			std::cout << "Inserire di nuovo la password -> ";
 			 cin >> login.repasswd;
+			 
+			 char c1 = ' ';
+			 while(c1 != 13) //Fa un loop finche non viene premuto il tasto "ENTER"
+			 {
+				 c1 = _getch();
+				 if(c1 == 13)
+					 break;
+
+				 if(c1 == 8)
+				 {
+					 if(login.repasswd.size() != 0)   //Cancella solo se c'è un input 
+					 {
+						 cout << "\b \b";
+						 login.repasswd.erase(login.repasswd.size() - 1);
+					 }
+				 }
+
+				 if((c1 > 47 && c1 < 58) || (c1 > 64 && c1 < 91) || (c1 > 96 && c1 < 123))  //ASCii per integer e alfanumerici 
+				 {
+					 login.repasswd += c1;
+					 cout << "*";
+				 }
+			 }
+
+
+
 
 			//convalida le password
 			if(login.passwd == login.repasswd)
@@ -198,15 +249,15 @@ void GetLogin()
 		if(tentativi != 0){
 
 		std::cout << "Enter Your Password -> ";
-		 char c = ' ';
 
-		 while(c != 13) //Fa un loop finche non viene premuto il tasto "ENTER"
+		 char c2 = ' ';
+		 while(c2 != 13) //Fa un loop finche non viene premuto il tasto "ENTER"
 		 {
-			 c = _getch();
-			 if(c == 13)
+			 c2 = _getch();
+			 if(c2 == 13)
 				 break;
 
-			 if(c == 8)
+			 if(c2 == 8)
 			 {
 				 if(login.passwd.size() != 0)   //Cancella solo se c'è un input 
 				 {
@@ -215,9 +266,9 @@ void GetLogin()
 				 }
 			 }
 
-			 if((c > 47 && c < 58) || (c > 64 && c < 91) || (c > 96 && c < 123))  //ASCii per integer e alfanumerici 
+			 if((c2 > 47 && c2 < 58) || (c2 > 64 && c2 < 91) || (c2 > 96 && c2 < 123))  //ASCii per integer e alfanumerici 
 			 {
-				 login.passwd += c;
+				 login.passwd += c2;
 				 cout << "*";
 			 }
 		 }
